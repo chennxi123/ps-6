@@ -1,0 +1,679 @@
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Global/Shared Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+:root {
+  --primary-color: #0a0045;
+  --circles-light-mode: #c5c8de;
+  --circles-dark-mode: #0f0066;
+  --text-highlight: rgba(135, 205, 255, 0.4);
+  --project-card-buttons: #1f7f7f;
+}
+
+.light-mode {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.dark-mode {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  z-index: 0;
+}
+
+h2 {
+  position: relative;
+  font-size: 3.25rem;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.4em;
+    width: 100%;
+    background-color: var(--text-highlight);
+  }
+}
+
+h2 {
+  &::after {
+    height: 16px;
+  }
+}
+
+h3 {
+  font-size: 2.6rem;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -4.5rem;
+  visibility: hidden;
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Background Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+canvas {
+  position: fixed;
+  z-index: -999;
+  top: 0;
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Navbar Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+#navbar {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 2.8rem;
+  width: 100%;
+  height: 4.5rem;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  nav {
+    height: 100%;
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.nav-logo {
+  text-decoration: none;
+  color: white;
+}
+
+.light-dark-button {
+  i {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 0.3rem;
+    border-radius: 10px;
+    transition: 0.25s ease-in-out;
+    border: 3px solid white;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  }
+}
+
+.hamburger {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // Hidden Checkbox
+  input {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+    opacity: 0;
+    // Animate Hidden Menu
+    &:checked {
+      ~ .hamburger-menu {
+        transform: none;
+      }
+      ~ .hamburger-button span {
+        &:nth-of-type(1) {
+          top: 12.5px;
+          transform: rotate(135deg);
+        }
+        &:nth-of-type(2) {
+          transform: translateX(-60px);
+          opacity: 0;
+        }
+        &:nth-of-type(3) {
+          top: 12.5px;
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+}
+// Create Hamburger
+.hamburger-button {
+  position: relative;
+  height: 60%;
+  width: 60%;
+}
+
+span {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 5px;
+  background-color: white;
+  transform: rotate(0deg);
+  border-radius: 20px;
+  transition: 0.25s ease-in-out;
+  &:nth-of-type(1) {
+    top: 0px;
+  }
+  &:nth-of-type(2) {
+    top: 12.5px;
+  }
+  &:nth-of-type(3) {
+    top: 25px;
+  }
+}
+
+// Hidden Menu
+.hamburger-menu {
+  z-index: 10;
+  position: absolute;
+  width: calc(100vw - 1em);
+  height: 90vh;
+  left: 0;
+  top: 4.3rem;
+  padding: 1em 0 0 1em;
+  background: var(--primary-color);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  a {
+    text-decoration: none;
+  }
+  li {
+    padding: 0.5em 0;
+    color: white;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background-color: white;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 125ms ease-in;
+    }
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+  i {
+    color: white;
+    padding-right: 0.5em;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Section One Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+#hero {
+  top: -10rem;
+}
+
+#heroSection {
+  .container {
+    margin: 12vh 5vw 0 5vw;
+  }
+  h1 {
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: bold;
+    margin-bottom: 4vh;
+    color: inherit;
+  }
+  h4 {
+    color: inherit;
+    display: inline;
+    font-size: 1.875rem;
+    font-weight: 400;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.25em;
+      width: 100%;
+      height: 12px;
+      background-color: var(--text-highlight);
+    }
+  }
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 7.5rem auto;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Section Two Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+#aboutSection {
+  margin: 0 10vw;
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+  .header-container {
+    display: flex;
+    justify-content: center;
+  }
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    p {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.skills-container {
+  margin: 2rem 0 8rem 0;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4, 40px);
+  grid-template-rows: repeat(2, 40px);
+  gap: 2.5rem;
+}
+
+.skill {
+  place-self: center;
+  i {
+    font-size: 4rem;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Section Three Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+#projectsSection {
+  margin: 0 10vw;
+  .header-container {
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    margin: 0 auto;
+    max-width: fit-content;
+  }
+}
+.projects-container,
+.coming-soon-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+
+.project-card {
+  background-color: white;
+  color: var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  &:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
+}
+
+.card-content {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.project-thumbnail-frame {
+  height: 40%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top left;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+
+.card-details {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h5 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.card-technologies {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 0.6rem;
+}
+
+.card-technologies-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+  &:nth-last-child(1) {
+    margin-bottom: 0;
+  }
+}
+
+.technology {
+  background-color: var(--primary-color);
+  margin: 0.2rem;
+  &:nth-of-type(1) {
+    margin-left: 0;
+  }
+  &:nth-last-of-type(1) {
+    margin-right: 0;
+  }
+  p {
+    font-size: 1.125rem;
+    font-weight: bold;
+    padding: 0.1875rem 0.5rem;
+    color: white;
+  }
+}
+
+.card-description {
+  margin: 0 1.25rem 1rem 1.25rem;
+  p {
+    font-weight: bold;
+    font-size: 0.875rem;
+  }
+}
+
+.card-buttons {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1em;
+  a {
+    text-align: center;
+    text-decoration: none;
+    padding: 0.3rem 0;
+    width: max(40%, 7rem);
+    background-color: var(--project-card-buttons);
+    color: white;
+    font-weight: bold;
+    font-size: 1.188rem;
+    border-radius: 5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--project-card-buttons);
+    transition: 0.125s ease-in-out;
+    &:hover {
+      background-color: white;
+      color: var(--project-card-buttons);
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Section Four Properties
+///////
+////////////////////////////////////////////////////////////////////////
+
+#contactSection {
+  .header-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.contact-container {
+  margin: 4rem 0 8rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ul {
+    padding-left: 0;
+    width: 65%;
+    max-width: 750px;
+  }
+  li {
+    list-style: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.875rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: 0.25s ease-in-out;
+    &:nth-last-of-type(1) {
+      margin-bottom: 0;
+    }
+  }
+  .li-light-mode {
+    border: solid 3px var(--primary-color);
+    background-color: white;
+    color: var(--primary-color);
+    &:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  }
+  .li-dark-mode {
+    border: solid 3px white;
+    color: white;
+    &:hover {
+      background-color: white;
+      color: var(--primary-color);
+    }
+  }
+  a {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  i {
+    padding: 10px 0 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+  }
+  p {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.contact-bottom {
+  text-align: center;
+  font-size: 0.625rem;
+}
+
+////////////////////////////////////////////////////////////////////////
+///////
+///////        Media Queries
+///////
+////////////////////////////////////////////////////////////////////////
+
+////////////////// Navbar /////////////////////////
+
+@media (min-width: 769px) {
+  .nav-logo {
+    font-size: 2.8rem;
+    position: absolute;
+    left: 2rem;
+  }
+
+  #navbar {
+    nav {
+      justify-content: flex-end;
+    }
+    input {
+      display: none;
+    }
+    ul {
+      font-size: 1.5rem;
+    }
+    a {
+      margin-right: 1rem;
+      &:nth-last-of-type(1) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .light-dark-button {
+    margin-right: 0.2rem;
+  }
+
+  .hamburger {
+    width: 350px;
+    i {
+      display: none;
+    }
+  }
+  .hamburger-menu {
+    z-index: 10;
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0;
+    transform: translate(0, 0);
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    transition: none;
+  }
+  .hamburger-button {
+    display: none;
+  }
+}
+
+////////////////// Section One ////////////////////
+
+////////////////// Section Two ////////////////////
+
+@media (min-width: 769px) {
+  .skills-container {
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: auto;
+  }
+}
+
+////////////////// Section Three //////////////////
+
+@media (min-width: 769px) {
+  .projects-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .coming-soon-container {
+    display: grid;
+    place-items: center;
+  }
+  .project-card {
+    margin: 2rem;
+    margin-top: 0;
+    position: relative;
+    &:nth-last-of-type(1) {
+      margin-bottom: 2rem;
+    }
+    max-width: 500px;
+  }
+  .card-buttons {
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    a {
+      width: 90%;
+      margin-bottom: 1rem;
+      &:nth-last-of-type(1) {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .card-content {
+    padding-bottom: 9rem;
+  }
+}
+
+@media (min-width: 1312px) {
+  .card-buttons {
+    flex-direction: row;
+    a {
+      margin-bottom: 0;
+      width: max(40%, 7rem);
+    }
+  }
+  .card-content {
+    padding-bottom: 5rem;
+  }
+  .project-card {
+    max-width: 500px;
+  }
+}
+
+////////////////// Section Four //////////////////
