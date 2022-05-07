@@ -93,7 +93,7 @@ canvas {
   top: 0;
   z-index: 1000;
   nav {
-    height: 200%;
+    height: 100%;
     margin: 0 4rem;
     display: flex;
     flex-direction: row;
@@ -171,7 +171,7 @@ span {
   position: absolute;
   z-index: 1;
   width: 30px;
-  height: 5px;
+  height: 20px;
   background-color: white;
   transform: rotate(0deg);
   border-radius: 20px;
